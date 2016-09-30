@@ -7,10 +7,8 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import servlets.IndexServlet;
-import servlets.SignInServlet;
-import servlets.SignUpServlet;
-import servlets.WebSocketChatServlet;
+import servlets.*;
+import sessionService.SessionService;
 
 
 /**
@@ -23,6 +21,8 @@ public class Main {
 
         Server server = new Server(8080);
 
+        SessionService sessionService = new SessionService();
+
         ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         //contextHandler.addServlet(new ServletHolder(new SignUpServlet(service)),"/signup");
         //contextHandler.addServlet(new ServletHolder(new SignInServlet(service)),"/signin");
@@ -31,6 +31,7 @@ public class Main {
         resource_handler.setDirectoriesListed(true);
         resource_handler.setResourceBase("public_html");
         contextHandler.addServlet(new ServletHolder(new WebSocketChatServlet()),"/chat");
+        contextHandler.addServlet(new ServletHolder(new GetSessionServlet(sessionService)), "/sessions");
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resource_handler, contextHandler});
         server.setHandler(handlers);

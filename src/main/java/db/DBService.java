@@ -14,7 +14,7 @@ public class DBService {
     private UserDAO userDAO;
 
     public DBService(){
-        this.connection = getH2Connection();
+        this.connection = getSqLiteConnection();
         userDAO = new UserDAO(this.connection);
 
     }
@@ -67,6 +67,10 @@ public class DBService {
         }
     }
 
+    public Connection getConnection(){
+        return connection;
+    }
+
 
 
 
@@ -85,5 +89,19 @@ public class DBService {
     }
     public void closeConnection() throws SQLException {
         connection.close();
+    }
+
+    public static Connection getSqLiteConnection(){
+        try {
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:/Users/Oceanos/IdeaProjects/serverMail2/src/main/resources\\log_28_september.db");
+            System.out.println("Connection open");
+            return conn;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
