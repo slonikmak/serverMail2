@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "letter": "G",
+        "color": "blue",
+        "rank": "7",
+        "ascii": "71"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [595.80547, 311.8934], [595.80547, 311.8934], [59.580532,31.18934]
+        ]
+      }
+    }
+
+
+  ]
+}
