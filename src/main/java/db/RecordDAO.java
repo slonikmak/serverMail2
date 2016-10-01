@@ -47,4 +47,14 @@ public class RecordDAO {
         });
         return list;
     }
+    public long getRecordsCountBySession(long sessionId) throws SQLException {
+        long count = 0;
+        return executor.execQuery("SELECT * FROM record WHERE session_id ="+sessionId, resultSet -> {
+            long size = 0;
+            while (resultSet.next()){
+                size++;
+            }
+            return size;
+        });
+    }
 }

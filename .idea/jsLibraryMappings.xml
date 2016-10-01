@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/public_html/app.js" libraries="{jqury}" />
+    <file url="file://$PROJECT_DIR$/public_html/map.html" libraries="{jqury}" />
+    <file url="PROJECT" libraries="{jqury}" />
+  </component>
+</project>

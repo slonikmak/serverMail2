@@ -32,7 +32,8 @@ public class SessionDAO {
         List<Session> list = new ArrayList<>();
         executor.execQuery("select * from session", resultSet -> {
             while (resultSet.next()){
-                list.add(new Session(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3), resultSet.getLong(4), resultSet.getString(5)));
+                Session session = new Session(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3), resultSet.getLong(4), resultSet.getString(5));
+                list.add(session);
             }
             return list;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1302575861">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="Sqlite (Xerial) - baise.s3db" uuid="fdfb34be-d287-48a2-a048-8d5360340b06">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
@@ -8,6 +8,12 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/main/resources\baise.s3db</jdbc-url>
     </data-source>
     <data-source source="LOCAL" name="Sqlite (Xerial) - log_28_september.db" uuid="67957b64-e57d-4a7a-bb5b-7b906557ab1b">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/main/resources\log_28_september.db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Sqlite (Xerial) - log_28_september.db [2]" uuid="7dc96e37-a1bd-426c-a288-28bee91e7ce4">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

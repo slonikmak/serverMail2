@@ -14,6 +14,15 @@ public class Session {
     private String type;
     private long time;
     private String date;
+    private long recordsCount;
+
+    public long getRecordsCount() {
+        return recordsCount;
+    }
+
+    public void setRecordsCount(long recordsCount) {
+        this.recordsCount = recordsCount;
+    }
 
     public Session() {
     }
@@ -24,6 +33,7 @@ public class Session {
         this.type = type;
         this.time = time;
         this.date = date;
+        this.recordsCount = 0;
     }
 
     public long getId() {
@@ -71,6 +81,7 @@ public class Session {
         return "{" +
                 "id:" + id +
                 ", name:'" + name + '\'' +
+                ", recordsCount:'" + recordsCount+'\'' +
                 ", type:'" + type + '\'' +
                 ", time:" + time +
                 ", date:'" + date + '\'' +

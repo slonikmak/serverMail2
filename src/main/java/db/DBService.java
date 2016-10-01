@@ -94,7 +94,7 @@ public class DBService {
     public static Connection getSqLiteConnection(){
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:/Users/Oceanos/IdeaProjects/serverMail2/src/main/resources\\log_28_september.db");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:/Users/Anton/IdeaProjects/serverMail2/src/main/resources\\log_28_september.db");
             System.out.println("Connection open");
             return conn;
         } catch (SQLException e) {

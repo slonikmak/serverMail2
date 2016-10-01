@@ -32,6 +32,7 @@ public class Main {
         resource_handler.setResourceBase("public_html");
         contextHandler.addServlet(new ServletHolder(new WebSocketChatServlet()),"/chat");
         contextHandler.addServlet(new ServletHolder(new GetSessionServlet(sessionService)), "/sessions");
+        contextHandler.addServlet(new ServletHolder(new GetRecordsServlet(sessionService)), "/records");
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resource_handler, contextHandler});
         server.setHandler(handlers);

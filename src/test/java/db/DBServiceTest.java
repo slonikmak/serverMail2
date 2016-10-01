@@ -2,8 +2,7 @@ package db;
 
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.sql.Date;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -18,6 +17,9 @@ public class DBServiceTest {
         DBService dbService = new DBService();
         Connection connection = dbService.getConnection();
         SessionDAO sessionDAO = new SessionDAO(connection);
+
+        RecordDAO recordDAO = new RecordDAO(connection);
+        System.out.println(recordDAO.getRecordsCountBySession(5));
 
 
         System.out.println(sessionDAO.getSessions());

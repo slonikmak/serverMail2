@@ -26,4 +26,8 @@ public class SessionService {
     public List<Session> getSessionsList() throws SQLException {
         return sessionDAO.getSessions();
     }
+
+    public long getRecordsCount(long sessionId) throws SQLException {
+        return recordDAO.getRecordsCountBySession(sessionId);
+    }
 }
