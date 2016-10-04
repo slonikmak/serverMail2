@@ -14,7 +14,6 @@ public class Conn {
     public static void setConn() throws ClassNotFoundException, SQLException, IllegalAccessException, InstantiationException {
         conn = null;
         //Class.forName("org.sqlite.JDBC");
-        //conn = DriverManager.getConnection("jdbc:sqlite:baise.s3db");
         Class.forName("org.h2.Driver");
         conn = DriverManager.getConnection("jdbc:h2:./test","test", "test");
         System.out.println(conn.getAutoCommit());

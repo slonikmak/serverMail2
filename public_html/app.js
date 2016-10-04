@@ -28,19 +28,48 @@ function initLeafMap() {
     });
 
 
-    jQuery.getJSON( "newData.json", function( data ) {
-        L.geoJson(data).addTo(map);
-    });
+
 
     function setSessionList(data) {
         for (var i=0; i<data.length; i++){
-            var a = $("<a href=''></a>").html(data[i].name+"&nbsp;&nbsp;&nbsp;&nbsp;"+data[i].type +
-                " "+data[i].date+" "+millisToTime(data[i].time)).attr("href", window.location.origin+"/"+"records?sessionid="+data[i].id);
-            var div = $("<div class='sessionItem'></div>").append(a);
-            $("#sessions").append(div);
+            var a = $("<div class='sessionItem'></div>")
+                .html("<h3>"+data[i].name+"</h3><span>type: </span>"+data[i].type +
+                "<span> date: </span>"+data[i].date+"<span> time:</span> "+millisToTime(data[i].time))
+        .attr("data-link", window.location.origin+"/"+
+                "records?sessionid="+data[i].id + "&type=GPS");
+
+            $("#sessions").append(a);
             console.log(data[i]);
         }
     }
+
+    $("#sessions").click(function (e) {
+        console.log(e);
+
+        var link = $(e.target).attr("data-link");
+        if (link == undefined){
+            link = $(e.target).parent().attr("data-link");
+        }
+        jQuery.getJSON( link, function( data ) {
+            //L.geoJson(data).addTo(map);
+
+            var layer = L.geoJson(data, {
+                onEachFeature: function(feature, layer) {
+                    layer.on({
+                        click: onClick
+                    });
+                }
+            }).addTo(map)
+
+            function onClick(e) {
+                map.removeLayer(layer);
+            }
+
+        });
+        console.log(link);
+
+    });
+
 
     function millisToTime(s) {
         var ms = s % 1000;

@@ -14,6 +14,8 @@ import java.util.List;
  * Created by Oceanos on 30.09.2016.
  */
 public class SessionDAO {
+
+
     private Executor executor;
 
     public SessionDAO(Connection connection){

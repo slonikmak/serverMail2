@@ -28,6 +28,12 @@ public class SessionService {
     }
 
     public long getRecordsCount(long sessionId) throws SQLException {
-        return recordDAO.getRecordsCountBySession(sessionId);
+        return recordDAO.getRecordsCountBySession(sessionId, Record.RecordType.ALL);
+    }
+
+    public List<Record> getRecords(String type, long sessionId) throws SQLException {
+        Record.RecordType recordType = Record.RecordType.valueOf(type);
+
+        return recordDAO.getRecords(sessionId, recordType);
     }
 }

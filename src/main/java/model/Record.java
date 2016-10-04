@@ -9,6 +9,16 @@ import java.util.Date;
  * Created by Oceanos on 30.09.2016.
  */
 public class Record {
+    public enum RecordType{
+        MOTION("MOTION"), GPS("GPS"), DEPTH("DEPTH"), TEMP("TEMP"), BAT("BAT"), SERVO_P("SERVO_P"), SERVO_V("SERVO_V"), ALL("ALL");
+
+        String name;
+
+        RecordType(String name){
+            this.name = name;
+        }
+    }
+
     private long id;
     private String name;
     private String value;
@@ -78,13 +88,13 @@ public class Record {
 
     @Override
     public String toString() {
-        return "Record{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                ", time=" + time +
-                ", date=" + date +
-                ", sessionId=" + sessionId +
+        return "{" +
+                "id:" + id +
+                ", name:'" + name + '\'' +
+                ", value:'" + value + '\'' +
+                ", time:" + time +
+                ", date:" + date +
+                ", sessionId:" + sessionId +
                 '}';
     }
 }

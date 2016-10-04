@@ -9,6 +9,11 @@ import java.util.Date;
  * Created by Oceanos on 30.09.2016.
  */
 public class Session {
+    public enum SessionType{
+        SERVO_MODE, MISSION_PLANNER_MODE
+    }
+
+
     private long id;
     private String name;
     private String type;

@@ -2,6 +2,7 @@ package db;
 
 import db.executor.Executor;
 import model.Record;
+import model.Record.RecordType;
 import model.Session;
 
 import java.sql.Connection;
@@ -47,7 +48,7 @@ public class RecordDAO {
         });
         return list;
     }
-    public long getRecordsCountBySession(long sessionId) throws SQLException {
+    public long getRecordsCountBySession(long sessionId, RecordType type) throws SQLException {
         long count = 0;
         return executor.execQuery("SELECT * FROM record WHERE session_id ="+sessionId, resultSet -> {
             long size = 0;
@@ -55,6 +56,27 @@ public class RecordDAO {
                 size++;
             }
             return size;
+        });
+    }
+
+    public List<Record> getRecords(long sessionId, RecordType type) throws SQLException {
+
+        String query = "SELECT * FROM record WHERE session_id = %d AND name = '%s'";
+        switch (type) {
+            case  ALL: query = "SELECT * FROM record WHERE session_id ="+sessionId;
+                break;
+            case GPS: query = String.format(query, sessionId, RecordType.GPS.name()) + " AND value != '__,__'";
+                break;
+        }
+
+        System.out.println(query);
+
+        return executor.execQuery(query, resultSet -> {
+            List<Record> records = new ArrayList<>();
+            while (resultSet.next()){
+               records.add(new Record(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3), resultSet.getLong(4), resultSet.getString(5), resultSet.getLong(6)));
+            }
+            return records;
         });
     }
 }

@@ -1,4 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 #map {
-    width:40em;
     height:40em;
+    margin: 10px;
+}
+header {
+    background-color: #3388ff;
+    position: relative;
+    height: 50px;
+}
+#main {
+    margin: 0 auto;
+    max-width: 500px;
+}
+#getDbLink {
+    display: block;
+    width: 50px;
+    height: 20px;
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 20px;
+}
+.sessionItem h3 {
+    color: #222222;
+    font-size: 18px;
+}
+.sessionItem {
+    color: #777777;
+    font-size: 12px;
+    cursor: pointer;
+}
+.sessionItem span {
+    color: #222222;
+}
+.sessionItem:hover {
+    color: #3388ff;
+}
+.sessionItem h3:hover{
+    color: #3388ff;
 }

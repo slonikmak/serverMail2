@@ -1,6 +1,7 @@
 package main;
 
 import accountService.AccountService;
+import context.Contex;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -9,6 +10,9 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import servlets.*;
 import sessionService.SessionService;
+import util.Utills;
+
+import java.nio.file.Paths;
 
 
 /**
@@ -16,6 +20,14 @@ import sessionService.SessionService;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
+        if (args.length>0){
+            System.out.println("Path to working base: "+args[0]);
+            Contex.setDBPath(args[0]);
+        }
+
+        System.out.println("Path to download base: "+Paths.get("public_html/log_base.db").toAbsolutePath());
+
+        Utills.copyDb(Contex.getDBPath(), "public_html/log_base.db");
 
         //AccountService service = new AccountService();
 

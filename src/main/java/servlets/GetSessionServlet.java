@@ -1,9 +1,12 @@
 package servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import model.Session;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ArrayNode;
+
 import sessionService.SessionService;
+
+
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +40,7 @@ public class GetSessionServlet extends HttpServlet{
             }
             //System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode));
             response.getOutputStream().write(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode).getBytes("UTF-8"));
-            response.setContentType("text/plain; charset=UTF-8");
+            response.setContentType("application/json; charset=UTF-8");
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setStatus( HttpServletResponse.SC_OK );
             //response.setContentType("application/json");
