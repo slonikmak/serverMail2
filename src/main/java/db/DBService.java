@@ -1,6 +1,6 @@
 package db;
 
-import context.Contex;
+import context.Context;
 import model.User;
 
 import java.sql.Connection;
@@ -95,7 +95,7 @@ public class DBService {
     public static Connection getSqLiteConnection(){
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:"+ Contex.getDBPath());
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:"+ Context.getDBPath());
             System.out.println("Connection open");
             return conn;
         } catch (SQLException e) {
