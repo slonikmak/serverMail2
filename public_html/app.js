@@ -19,7 +19,7 @@ function initLeafMap() {
         .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
         .openPopup();
 
-    jQuery.getJSON("http://localhost:8080/sessions", null,function (data) {
+    jQuery.getJSON(window.location.origin+"/"+"sessions", null,function (data) {
         console.log("Loading data");
         console.log(data);
         setSessionList(data);
