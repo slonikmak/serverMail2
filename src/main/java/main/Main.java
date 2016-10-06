@@ -11,6 +11,7 @@ import servlets.*;
 import sessionService.SessionService;
 import util.Utills;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -25,14 +26,13 @@ public class Main {
 
 
         if (args.length>0){
-            System.out.println("Path to working base: "+args[0]);
-            Context.setDBPath(args[0]);
+
+            Utills.setProperties(args[0]);
         }
 
 
-        System.out.println("Path to download base: "+Paths.get(Context.pathTo));
 
-        Utills.copyDb(Context.getDBPath(), Paths.get(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent()+Context.pathTo);
+        Utills.copyDb(Context.getDBPath(), Context.getPublicHtmlPath()+ File.separator+Context.dbName);
 
         //AccountService service = new AccountService();
 
@@ -46,7 +46,7 @@ public class Main {
         //contextHandler.addServlet(new ServletHolder(new IndexServlet()), "/index");
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
-        resource_handler.setResourceBase(Paths.get(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent()+"/public_html");
+        resource_handler.setResourceBase(Context.getPublicHtmlPath());
         contextHandler.addServlet(new ServletHolder(new WebSocketChatServlet()),"/chat");
         contextHandler.addServlet(new ServletHolder(new GetSessionServlet(sessionService)), "/sessions");
         contextHandler.addServlet(new ServletHolder(new GetRecordsServlet(sessionService)), "/records");

@@ -1,9 +1,15 @@
 package util;
 
+import context.Context;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Properties;
 
 /**
  * Created by Oceanos on 30.09.2016.
@@ -27,5 +33,16 @@ public class Utills {
         Path pathTo = Paths.get(to);
         if (Files.exists(pathTo)) Files.delete(pathTo);
         Files.copy(Paths.get(from), pathTo);
+        System.out.println("Copy from:"+from+" to: "+to);
+    }
+
+    public static void setProperties(String fileName) throws IOException {
+        InputStream inputStream = Files.newInputStream(Paths.get(fileName));
+        Properties properties = new Properties();
+
+        properties.load(inputStream);
+        Context.setDBPath(properties.getProperty("DBPath"));
+        Context.setPublicHtmlPath(properties.getProperty("publicHtmlPath"));
+
     }
 }
