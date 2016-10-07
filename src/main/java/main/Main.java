@@ -14,6 +14,7 @@ import util.Utills;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 
 /**
@@ -28,6 +29,10 @@ public class Main {
         if (args.length>0){
 
             Utills.setProperties(args[0]);
+        } else {
+            System.out.println("Add property file path:");
+            Scanner sc = new Scanner(System.in);
+            Utills.setProperties(sc.nextLine());
         }
 
 
