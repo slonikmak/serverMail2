@@ -57,6 +57,7 @@ public class GetRecordsServlet extends HttpServlet {
             String coords = r.getValue();
             //if (coords.equals("__,__")) continue;
             String[] coordsArray = coords.split("__,__");
+            if (coordsArray[0].equals("")) continue;
             LngLatAlt lngLatAlt = new LngLatAlt(Utills.coordsConverter(Double.parseDouble(coordsArray[1])), Utills.coordsConverter(Double.parseDouble(coordsArray[0])));
             lineString.add(lngLatAlt);
 
@@ -72,18 +73,23 @@ public class GetRecordsServlet extends HttpServlet {
 
 
         try {
-            Record startRecord = records.get(0);
+            /*Record startRecord = records.get(0);
             String[] startRecArray = startRecord.getValue().split("__,__");
             Record endRecprd = records.get(records.size()-1);
-            String[] endRecArray = endRecprd.getValue().split("__,__");
+            String[] endRecArray = endRecprd.getValue().split("__,__");*/
 
+            //if (lineString.getCoordinates().size()==0)
+            //lineString.getCoordinates().get(0)
             Feature startPoint = new Feature();
-            Point point = new Point(new LngLatAlt(Utills.coordsConverter(Double.parseDouble(startRecArray[1])), Utills.coordsConverter(Double.parseDouble(startRecArray[0]))));
+            //Point point = new Point(new LngLatAlt(Utills.coordsConverter(Double.parseDouble(startRecArray[1])), Utills.coordsConverter(Double.parseDouble(startRecArray[0]))));
+            Point point = new Point(lineString.getCoordinates().get(0));
             startPoint.setGeometry(point);
             featureCollection.add(startPoint);
 
             Feature endPoint = new Feature();
-            point = new Point(new LngLatAlt(Utills.coordsConverter(Double.parseDouble(endRecArray[1])), Utills.coordsConverter(Double.parseDouble(endRecArray[0]))));
+            //point = new Point(new LngLatAlt(Utills.coordsConverter(Double.parseDouble(endRecArray[1])), Utills.coordsConverter(Double.parseDouble(endRecArray[0]))));
+            point = new Point(lineString.getCoordinates().get(lineString.getCoordinates().size()-1));
+
             endPoint.setGeometry(point);
             featureCollection.add(endPoint);
         } catch (IndexOutOfBoundsException e){

@@ -1,4 +1,8 @@
 function initLeafMap() {
+
+    var recordsCount = 0;
+
+
     var map = L.map('map').setView([51.505, -0.09], 13);
 
     // Tiles/{z}/{x}/{y}.png  http://{s}.tile.osm.org/{z}/{x}/{y}.png
@@ -44,7 +48,6 @@ function initLeafMap() {
     }
 
     $("#sessions").click(function (e) {
-        console.log(e);
 
         var link = $(e.target).attr("data-link");
         if (link == undefined){
@@ -52,6 +55,11 @@ function initLeafMap() {
         }
         jQuery.getJSON( link, function( data ) {
             //L.geoJson(data).addTo(map);
+
+            recordsCount = data.features[0].geometry.coordinates.length;
+            console.log(recordsCount);
+
+            console.log(data);
 
             var layer = L.geoJson(data, {
                 onEachFeature: function(feature, layer) {
@@ -68,6 +76,17 @@ function initLeafMap() {
         });
         console.log(link);
 
+    });
+
+    var handle = $( "#custom-handle" );
+
+    $('#slider').slider({
+        create: function() {
+            handle.text( $( this ).slider( "value" ) );
+        },
+        slide: function( event, ui ) {
+            handle.text( Math.round(ui.value*(recordsCount/100)) );
+        }
     });
 
 

@@ -65,7 +65,7 @@ public class RecordDAO {
         switch (type) {
             case  ALL: query = "SELECT * FROM record WHERE session_id ="+sessionId;
                 break;
-            case GPS: query = String.format(query, sessionId, RecordType.GPS.name()) + " AND value != '__,__'";
+            case GPS: query = String.format(query, sessionId, RecordType.GPS.name()) + " AND value != 'null__,__null__,__0.0__,__0.0'";
                 break;
         }
 

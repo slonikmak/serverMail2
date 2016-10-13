@@ -43,3 +43,10 @@ header {
 .sessionItem h3:hover{
     color: #3388ff;
 }
+#sessions {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+#custom-handle{
+    width: 4em;
+}

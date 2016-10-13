@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Properties;
 
 /**
@@ -30,9 +31,14 @@ public class Utills {
     }
 
     public static void copyDb(String from, String to) throws IOException {
+
         Path pathTo = Paths.get(to);
-        if (Files.exists(pathTo)) Files.delete(pathTo);
-        Files.copy(Paths.get(from), pathTo);
+        System.out.println(pathTo);
+        if (Files.exists(pathTo)){
+            Files.delete(pathTo);
+        }
+        Files.createFile(pathTo);
+        Files.copy(Paths.get(from), pathTo, StandardCopyOption.REPLACE_EXISTING);
         System.out.println("Copy from:"+from+" to: "+to);
     }
 
