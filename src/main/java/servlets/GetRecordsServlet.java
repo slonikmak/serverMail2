@@ -30,13 +30,23 @@ public class GetRecordsServlet extends HttpServlet {
         String type = request.getParameter("type");
         long sessionId = Long.parseLong(request.getParameter("sessionid"));
 
-
-
         try {
-            response.getOutputStream().write(prepareGeoJsonString(sessionService.getRecords(type, sessionId)).getBytes("UTF-8"));
+            if (request.getParameter("gps_type").equals("self")){
+                response.getOutputStream().write(prepareGeoJsonString(sessionService.getSelfGPSRecords(sessionId), "self").getBytes("UTF-8"));
+            } else {
+                response.getOutputStream().write(prepareGeoJsonString(sessionService.getRecords(type, sessionId), "all").getBytes("UTF-8"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+
+        /*try {
+            response.getOutputStream().write(prepareGeoJsonString(sessionService.getRecords(type, sessionId)).getBytes("UTF-8"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
         response.setContentType("application/json; charset=UTF-8");
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setStatus( HttpServletResponse.SC_OK );
@@ -45,23 +55,39 @@ public class GetRecordsServlet extends HttpServlet {
         //response.getWriter().write("records. Session id = "+request.getParameter("sessionid"));
     }
 
-    private String prepareGeoJsonString(List<Record> records) throws JsonProcessingException {
+    private String prepareGeoJsonString(List<Record> records, String type) throws JsonProcessingException {
+
+
+
         String result = null;
         FeatureCollection featureCollection = new FeatureCollection();
 
         LineString lineString = new LineString();
 
+        if (type.equals("self")){
+            for (Record r : records) {
+                double[] coords = r.getCoords();
+                if (coords[2] != 0.0 || coords[2] != 0){
+                    LngLatAlt lngLatAlt = new LngLatAlt(coords[3], coords[2]);
+                    lineString.add(lngLatAlt);
+                }
 
 
-        for (Record r : records) {
-            String coords = r.getValue();
-            //if (coords.equals("__,__")) continue;
-            String[] coordsArray = coords.split("__,__");
-            if (coordsArray[0].equals("")) continue;
-            LngLatAlt lngLatAlt = new LngLatAlt(Utills.coordsConverter(Double.parseDouble(coordsArray[1])), Utills.coordsConverter(Double.parseDouble(coordsArray[0])));
-            lineString.add(lngLatAlt);
+            }
+        } else {
 
+            for (Record r : records) {
+                String coords = r.getValue();
+                //if (coords.equals("__,__")) continue;
+                String[] coordsArray = coords.split("__,__");
+                if (coordsArray[0].equals("")||coordsArray[0].equals("null")) continue;
+                LngLatAlt lngLatAlt = new LngLatAlt(Utills.coordsConverter(Double.parseDouble(coordsArray[1])), Utills.coordsConverter(Double.parseDouble(coordsArray[0])));
+                lineString.add(lngLatAlt);
+
+            }
         }
+
+
 
 
         Feature feature = new Feature();

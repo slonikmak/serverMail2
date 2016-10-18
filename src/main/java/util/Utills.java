@@ -51,4 +51,11 @@ public class Utills {
         Context.setPublicHtmlPath(properties.getProperty("publicHtmlPath"));
 
     }
+
+    public static String[] prepareValue(String[] value){
+        for (int i = 0; i < value.length; i++) {
+            if (value[i].equals("") || value[i].equals("null")) value[i] = "0.0";
+        }
+        return value;
+    }
 }

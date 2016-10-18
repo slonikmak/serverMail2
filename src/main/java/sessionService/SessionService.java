@@ -36,4 +36,8 @@ public class SessionService {
 
         return recordDAO.getRecords(sessionId, recordType);
     }
+
+    public List<Record> getSelfGPSRecords(long sesssionId) throws SQLException {
+        return recordDAO.getSelfGPSRecords(sesssionId);
+    }
 }

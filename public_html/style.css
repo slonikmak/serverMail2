@@ -50,3 +50,16 @@ header {
 #custom-handle{
     width: 4em;
 }
+#play_menu{
+    position: relative;
+    height: 20px;
+}
+#play_menu span{
+    position: absolute;
+    display: block;
+    width: 50px;
+    cursor: pointer;
+}
+#forward{
+    right: 0px;
+}

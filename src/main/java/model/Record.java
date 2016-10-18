@@ -26,6 +26,7 @@ public class Record {
     private String date;
     private long sessionId;
 
+
     public Record() {
     }
 
@@ -37,6 +38,7 @@ public class Record {
         this.date = date;
         this.sessionId = sessionId;
     }
+
 
     public long getId() {
         return id;
@@ -84,6 +86,15 @@ public class Record {
 
     public void setSessionId(long sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public double[] getCoords(){
+        String[] values = Utills.prepareValue(value.split("__,__"));
+        double[] coords = new double[values.length];
+        for (int i = 0; i < values.length; i++) {
+            coords[i] = Double.parseDouble(values[i]);
+        }
+        return coords;
     }
 
     @Override
