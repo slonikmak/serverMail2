@@ -50,6 +50,7 @@ function initLeafMap() {
     $("#sessions").click(function (e) {
 
         var link = $(e.target).attr("data-link");
+
         if (link == undefined) {
             link = $(e.target).parent().attr("data-link");
         }
