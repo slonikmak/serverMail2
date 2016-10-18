@@ -22,7 +22,7 @@ function initLeafMap() {
     }
 
     L.marker([51.5, -0.09]).addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .bindPopup('A pretty CSS3   popup.<br> Easily customizable.')
         .openPopup();
 
     jQuery.getJSON(window.location.origin + "/" + "sessions", null, function (data) {
